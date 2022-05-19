@@ -6,23 +6,27 @@ CREATE TABLE department (
 );
 
 /* Create Table Role */
-CREATE TABLE role(
+/* CREATE TABLE role(
     id INT PRIMARY KEY,
     title VARCHAR(30) NOT NULL,
     salary DECIMAL,
     department_id INT
-)
+) */
 /* Create Table Employee */
-CREATE TABLE employee(
+/* CREATE TABLE employee(
+
     id INT PRIMARY KEY,
-    first_name VARCHAR(30),
-    last_name VARCHAR(30),
+
+    first_name VARCHAR(30) NOT NULL,
+
+    last_name VARCHAR(30) NOT NULL,
+
     role_id INT,
     manager_id INT 
-) 
+)  */
 /* Create Table UtilizedBudget */
-CREATE TABLE utilizedBuget(
+/* CREATE TABLE utilizedBuget(
     department_id,
     budget INT,
     sum_salaries INT
-)
+) */
