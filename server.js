@@ -9,6 +9,7 @@ function EmployeeTrackerMenu() {
       message: "What would you like to do? (Use arrow keys)",
       choices: [
         "View All Employees",
+        "Add an Employee",
         "Update Employee Role",
         "View All Roles",
         "Add Role",
@@ -28,6 +29,9 @@ function EmployeeTrackerMenu() {
   inquirer.prompt(questions).then((answers) => {
     console.log(answers);
     if (answers.userWantsTo === "View All Employees") {
+      console.log(answers.userWantsTo);
+    }
+    if (answers.userWantsTo === "Add an Employee") {
       console.log(answers.userWantsTo);
     }
     if (answers.userWantsTo === "Update Employee Role") {
