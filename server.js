@@ -9,6 +9,7 @@ const { getRoles, newRole } = require("./routes/apiRoutes/rolesRoutes");
 const {
   getEmployees,
   newEmployee,
+  updateEmployee,
 } = require("./routes/apiRoutes/employeeRoutes");
 
 //PORT + app plugin
@@ -85,13 +86,16 @@ function EmployeeTrackerMenu() {
     if (answers.userWantsTo === "View All Employees") {
       console.log(answers.userWantsTo);
       getEmployees();
+      EmployeeTrackerMenu();
     }
     if (answers.userWantsTo === "Add an Employee") {
       console.log(answers.userWantsTo);
       newEmployee();
+      EmployeeTrackerMenu();
     }
     if (answers.userWantsTo === "Update Employee Role") {
       console.log(answers.userWantsTo);
+      updateEmployee();
     }
     if (answers.userWantsTo === "View All Roles") {
       console.log(answers.userWantsTo);
@@ -101,6 +105,7 @@ function EmployeeTrackerMenu() {
     if (answers.userWantsTo === "Add Role") {
       console.log(answers.userWantsTo);
       newRole();
+      EmployeeTrackerMenu();
     }
     if (answers.userWantsTo === "View All Departments") {
       getDepartments();

@@ -47,11 +47,45 @@ function newEmployee() {
 
     database.query(sql, params, (err, result) => {
       if (err) {
-        console.log(err, "Error in adding a department");
+        console.log(err, "Error in adding employee");
         return;
       }
       console.log(result);
     });
   });
 }
-module.exports = { getEmployees, newEmployee };
+
+function updateEmployee() {
+  getEmployees();
+  const updateEmployeeQuestions = [
+    {
+      type: "input",
+      name: "employeeId",
+      message:
+        "which employee's role do you want to update? [Enter Employee ID]",
+    },
+    {
+      type: "input",
+      name: "roleId",
+      message:
+        "Which Role ID do you want to update this employee to? [Enter NEW role ID]",
+    },
+  ];
+  inquirer.prompt(updateEmployeeQuestions).then((response) => {
+    const id = response.employeeId;
+    const roleId = response.roleId;
+    console.log(id, roleId);
+
+    const sql = `UPDATE employees SET role_id = ? WHERE id = ? `;
+    const params = [roleId, id];
+
+    database.query(sql, params, (err, result) => {
+      if (err) {
+        console.log(err, "Error in UPDATING employee");
+        return;
+      }
+      console.log(result);
+    });
+  });
+}
+module.exports = { getEmployees, newEmployee, updateEmployee };
