@@ -6,6 +6,10 @@ const {
   newDepartment,
 } = require("./routes/apiRoutes/departmentRoutes");
 const { getRoles, newRole } = require("./routes/apiRoutes/rolesRoutes");
+const {
+  getEmployees,
+  newEmployee,
+} = require("./routes/apiRoutes/employeeRoutes");
 
 //PORT + app plugin
 const PORT = process.env.PORT || 3001;
@@ -80,9 +84,11 @@ function EmployeeTrackerMenu() {
     console.log(answers);
     if (answers.userWantsTo === "View All Employees") {
       console.log(answers.userWantsTo);
+      getEmployees();
     }
     if (answers.userWantsTo === "Add an Employee") {
       console.log(answers.userWantsTo);
+      newEmployee();
     }
     if (answers.userWantsTo === "Update Employee Role") {
       console.log(answers.userWantsTo);

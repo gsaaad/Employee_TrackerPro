@@ -2,7 +2,8 @@ const database = require("../../db/connection");
 const inquirer = require("inquirer");
 
 function getRoles() {
-  const sql = `SELECT * FROM roles`;
+  const sql = `SELECT * FROM roles
+              LEFT JOIN departments ON roles.department_id = departments.id`;
   return database.query(sql, function (err, rows) {
     console.table(rows);
   });
