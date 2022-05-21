@@ -5,13 +5,14 @@ CREATE TABLE departments (
     name VARCHAR(30) NOT NULL
 );
 
-/* Create Table Role */
-/* CREATE TABLE role(
+
+/* Create Table Roles */
+CREATE TABLE roles(
     id INT PRIMARY KEY,
     title VARCHAR(30) NOT NULL,
     salary DECIMAL,
     department_id INT
-) */
+)
 /* Create Table Employee */
 /* CREATE TABLE employee(
 

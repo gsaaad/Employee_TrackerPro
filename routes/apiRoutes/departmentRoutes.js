@@ -11,12 +11,12 @@ router.get("/departments", (req, res) => {
       console.log(err);
       return;
     }
-    res.json({ message: "success", data: rows });
+    res.json({ message: "success, Look at all the departments", data: rows });
   });
 });
 
 // add a department
-router.post("/departments", ({ body }, res) => {
+router.post("/department", ({ body }, res) => {
   const sql = `INSERT INTO departments (id, name) VALUES (?,?)`;
 
   const params = [body.id, body.name];
