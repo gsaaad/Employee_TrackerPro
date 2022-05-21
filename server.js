@@ -1,4 +1,32 @@
+const express = require("express");
 const inquirer = require("inquirer");
+const router = express.Router();
+const database = require("./db/connection");
+const apiRoutes = require("./routes/apiRoutes");
+//PORT + app plugin
+const PORT = process.env.PORT || 3001;
+const app = express();
+
+//middle ware
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
+app.use("/api", apiRoutes);
+
+//univeral/catch any other page and send error
+app.use((req, res) => {
+  res.status(400).end();
+  console.log("WRONG PAGE, PAGE NOT AVAILABLE");
+});
+
+database.connect((err) => {
+  if (err) throw err;
+  console.log("Employee Tracker Database Connected");
+
+  app.listen(PORT, () => {
+    console.log(`SERVER ONLINE~ PORT: ${PORT}`);
+  });
+});
 
 function EmployeeTrackerMenu() {
   console.log("Employee MANAGER");

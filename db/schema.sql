@@ -1,6 +1,6 @@
 
 /* Create Table Department */
-CREATE TABLE department (
+CREATE TABLE departments (
     id INT PRIMARY KEY,
     name VARCHAR(30) NOT NULL
 );
