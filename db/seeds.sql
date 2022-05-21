@@ -19,4 +19,15 @@ VALUES
     (5, "Product Manager", 90000,5),
     (6, "Product Desginer", 99000, 6);
 
-
+INSERT INTO employees(id, first_name, last_name, role_id, manager_id)
+VALUES
+    (1, "Kevin", "Mance", 2, 1),
+    (2, "Kevin", "Mance", 2, 1),
+    (3, "Kevin", "Mance", 2, 1),
+    (4, "Kevin", "Mance", 2, 1),
+    (5, "Kevin", "Mance", 2, 1),
+    (6, "Kevin", "Mance", 2, 1),
+    (7, "Kevin", "Mance", 2, 1),
+    (8, "Kevin", "Mance", 2, 1),
+    (9, "Kevin", "Mance", 2, 1),
+    (10, "Kevin", "Mance", 2, 1);

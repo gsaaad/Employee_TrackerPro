@@ -1,8 +1,12 @@
 const express = require("express");
 const inquirer = require("inquirer");
-const router = express.Router();
 const database = require("./db/connection");
-const apiRoutes = require("./routes/apiRoutes");
+const {
+  getDepartments,
+  newDepartment,
+} = require("./routes/apiRoutes/departmentRoutes");
+const { getRoles, newRole } = require("./routes/apiRoutes/rolesRoutes");
+
 //PORT + app plugin
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -10,8 +14,6 @@ const app = express();
 //middle ware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-
-app.use("/api", apiRoutes);
 
 //univeral/catch any other page and send error
 app.use((req, res) => {
@@ -28,8 +30,27 @@ database.connect((err) => {
   });
 });
 
+function EmployeeTracker() {
+  console.log("Hello, Thank you for Logging in...");
+  console.log(`
+  ███████╗███╗░░░███╗██████╗░██╗░░░░░░█████╗░██╗░░░██╗███████╗███████╗
+  ██╔════╝████╗░████║██╔══██╗██║░░░░░██╔══██╗╚██╗░██╔╝██╔════╝██╔════╝
+  █████╗░░██╔████╔██║██████╔╝██║░░░░░██║░░██║░╚████╔╝░█████╗░░█████╗░░
+  ██╔══╝░░██║╚██╔╝██║██╔═══╝░██║░░░░░██║░░██║░░╚██╔╝░░██╔══╝░░██╔══╝░░
+  ███████╗██║░╚═╝░██║██║░░░░░███████╗╚█████╔╝░░░██║░░░███████╗███████╗
+  ╚══════╝╚═╝░░░░░╚═╝╚═╝░░░░░╚══════╝░╚════╝░░░░╚═╝░░░╚══════╝╚══════╝
+  
+  ████████╗██████╗░░█████╗░░█████╗░██╗░░██╗███████╗██████╗░  ██████╗░██████╗░░█████╗░
+  ╚══██╔══╝██╔══██╗██╔══██╗██╔══██╗██║░██╔╝██╔════╝██╔══██╗  ██╔══██╗██╔══██╗██╔══██╗
+  ░░░██║░░░██████╔╝███████║██║░░╚═╝█████═╝░█████╗░░██████╔╝  ██████╔╝██████╔╝██║░░██║
+  ░░░██║░░░██╔══██╗██╔══██║██║░░██╗██╔═██╗░██╔══╝░░██╔══██╗  ██╔═══╝░██╔══██╗██║░░██║
+  ░░░██║░░░██║░░██║██║░░██║╚█████╔╝██║░╚██╗███████╗██║░░██║  ██║░░░░░██║░░██║╚█████╔╝
+  ░░░╚═╝░░░╚═╝░░╚═╝╚═╝░░╚═╝░╚════╝░╚═╝░░╚═╝╚══════╝╚═╝░░╚═╝  ╚═╝░░░░░╚═╝░░╚═╝░╚════╝░`);
+
+  EmployeeTrackerMenu();
+}
+
 function EmployeeTrackerMenu() {
-  console.log("Employee MANAGER");
   const questions = [
     {
       type: "list",
@@ -43,6 +64,7 @@ function EmployeeTrackerMenu() {
         "Add Role",
         "View All Departments",
         "Add Department",
+        "All Done, Exit Menu",
       ],
       validate: (validInput) => {
         if (validInput) {
@@ -67,16 +89,27 @@ function EmployeeTrackerMenu() {
     }
     if (answers.userWantsTo === "View All Roles") {
       console.log(answers.userWantsTo);
+      getRoles();
+      EmployeeTrackerMenu();
     }
     if (answers.userWantsTo === "Add Role") {
       console.log(answers.userWantsTo);
+      newRole();
     }
     if (answers.userWantsTo === "View All Departments") {
-      console.log(answers.userWantsTo);
+      getDepartments();
+      EmployeeTrackerMenu();
     }
+
     if (answers.userWantsTo === "Add Department") {
       console.log(answers.userWantsTo);
+      newDepartment();
+      EmployeeTrackerMenu();
+    }
+    if (answers.userWantsTo === "All Done, Exit Menu") {
+      console.log("Thanks for using Employee Tracker Pro, Goodbye~!");
+      return;
     }
   });
 }
-EmployeeTrackerMenu();
+EmployeeTracker();

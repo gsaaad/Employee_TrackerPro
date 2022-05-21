@@ -1,33 +1,48 @@
-const express = require("express");
-const router = express.Router();
 const database = require("../../db/connection");
+const inquirer = require("inquirer");
 
-// view all roles
-router.get("/roles", (req, res) => {
+function getRoles() {
   const sql = `SELECT * FROM roles`;
-
-  database.query(sql, (err, rows) => {
-    if (err) {
-      console.log(err);
-      return;
-    }
-    res.json({ message: "success, Look at all the roles", data: rows });
+  return database.query(sql, function (err, rows) {
+    console.table(rows);
   });
-});
+}
 
-// add a role
-router.post("/role", ({ body }, res) => {
-  const sql = `INSERT INTO roles (id, title, salary, department_id) VALUES (?,?,?,?)`;
+function newRole() {
+  const addDepartmentQuestions = [
+    {
+      type: "input",
+      name: "title",
+      message: "What is the role title: ",
+    },
+    {
+      type: "input",
+      name: "salary",
+      message: "What is the role salary:",
+    },
+    {
+      type: "input",
+      name: "roleDepartmentId",
+      message: "Which department ID does it belong to: [insert department ID]",
+    },
+  ];
+  inquirer.prompt(addDepartmentQuestions).then((response) => {
+    const roleTitle = response.title;
+    const salary = response.salary;
+    const departmentId = response.roleDepartmentId;
+    console.log(roleTitle, salary, departmentId);
 
-  const params = [body.id, body.title, body.salary, body.department_id];
+    const sql = `INSERT INTO roles (title,salary,department_id) VALUES (?,?,?)`;
 
-  database.query(sql, params, (err, result) => {
-    if (err) {
-      res.status(400).json({ error: err.message });
-      console.log(err, "Error in adding a role!");
-    }
-    res.json({ message: "Successful Role add", data: body });
+    const params = [roleTitle, salary, departmentId];
+
+    database.query(sql, params, (err, result) => {
+      if (err) {
+        console.log(err, "Error in adding a department");
+        return;
+      }
+      console.log(result);
+    });
   });
-});
-
-module.exports = router;
+}
+module.exports = { getRoles, newRole };
