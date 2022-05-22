@@ -6,6 +6,7 @@ const {
   newDepartment,
 } = require("./routes/apiRoutes/departmentRoutes");
 const { getRoles, newRole } = require("./routes/apiRoutes/rolesRoutes");
+
 const {
   getEmployees,
   newEmployee,
@@ -86,12 +87,10 @@ function EmployeeTrackerMenu() {
     if (answers.userWantsTo === "View All Employees") {
       console.log(answers.userWantsTo);
       getEmployees();
-      EmployeeTrackerMenu();
     }
     if (answers.userWantsTo === "Add an Employee") {
       console.log(answers.userWantsTo);
       newEmployee();
-      EmployeeTrackerMenu();
     }
     if (answers.userWantsTo === "Update Employee Role") {
       console.log(answers.userWantsTo);
@@ -100,16 +99,13 @@ function EmployeeTrackerMenu() {
     if (answers.userWantsTo === "View All Roles") {
       console.log(answers.userWantsTo);
       getRoles();
-      EmployeeTrackerMenu();
     }
     if (answers.userWantsTo === "Add Role") {
       console.log(answers.userWantsTo);
       newRole();
-      EmployeeTrackerMenu();
     }
     if (answers.userWantsTo === "View All Departments") {
       getDepartments();
-      EmployeeTrackerMenu();
     }
 
     if (answers.userWantsTo === "Add Department") {
